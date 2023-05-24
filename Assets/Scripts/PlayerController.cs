@@ -61,9 +61,6 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
-
-
-
             if(Input.GetButtonDown("Jump") && sensor.isGrounded)
             {
                 rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -71,13 +68,11 @@ public class PlayerController : MonoBehaviour
 
              if(horizontal < 0)
         {
-            //spriteRenderer.flipX = true;
             transform.rotation = Quaternion.Euler(0, 180, 0);
             anim.SetBool("IsRunning", true);
         }
         else if(horizontal > 0)
         {
-            //spriteRenderer.flipX = false;
             transform.rotation = Quaternion.Euler(0, 0, 0);
             anim.SetBool("IsRunning", true);
         }
@@ -92,14 +87,9 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsJumpinng", true);
         }
 
-        if(Input.GetKeyDown(KeyCode.F) && gameManager.canShoot)
+        if(Input.GetKeyDown(KeyCode.F))
         {
             Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Attack();
         }
         }
     }    
@@ -117,21 +107,6 @@ public class PlayerController : MonoBehaviour
             sfxManager.CoinSound();
             Destroy(collider.gameObject);
         }
-    }
 
-        void Attack()
-    {
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(attackHitBox.position, attackRange, enemyLayer);
-
-        for (int i = 0; i < enemiesInRange.Length; i++)
-        {
-            Destroy(enemiesInRange[i].gameObject);
-        }
-    }
-
-        void OnDrawGizmos() 
-    {
-        Gizmos.DrawWireSphere(attackHitBox.position, attackRange);
-    }
-        
  }
+}

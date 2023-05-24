@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public bool isGameOver;
     public bool canShoot;
     public float powerUpDuration = 5;
-    float powerUpTimer = 0;
 
 
     public Text coinText;
@@ -22,14 +21,9 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> enemiesInScreen = new List<GameObject>();
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        ShootPowerUp();
 
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -42,24 +36,6 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
 
         StartCoroutine("LoadScene");
-    }
-
-    void ShootPowerUp()
-    {
-        if(canShoot)
-    {
-       if (powerUpTimer <= powerUpDuration)
-        {
-            powerUpTimer += Time.deltaTime;
-        } 
-
-        else 
-        {
-            canShoot = false;
-            powerUpTimer = 0;
-        }
-        
-     }
     }
 
     void KillAllEnemies()
